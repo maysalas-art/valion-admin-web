@@ -1,1 +1,22 @@
-<p>signup works!</p>
+<div class="signup-container">
+  <h2>Registro de Usuario</h2>
+  <form (submit)="onSignup()">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input id="name" [(ngModel)]="name" name="name" required />
+    </div>
+    <div class="form-group">
+      <label for="username">Usuario:</label>
+      <input id="username" [(ngModel)]="username" name="username" required />
+    </div>
+    <div class="form-group">
+      <label for="eos">EOS:</label>
+      <input id="eos" [(ngModel)]="eos" name="eos" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Contraseña:</label>
+      <input id="password" [(ngModel)]="password" name="password" type="password" required />
+    </div>
+    <button type="submit">Registrar</button>
+  </form>
+</div>

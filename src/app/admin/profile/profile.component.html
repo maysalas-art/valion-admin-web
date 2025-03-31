@@ -1,0 +1,42 @@
+<div class="layout-container">
+  <!-- Formulario para insertar dinosaurio -->
+  <div class="form-container">
+    <h2>Insertar Dino</h2>
+    <form (submit)="onSubmitDino()">
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input id="name" [(ngModel)]="dino.name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="bp">BP:</label>
+        <input id="bp" [(ngModel)]="dino.bp" name="bp" required />
+      </div>
+      <div class="form-group">
+        <label for="specialPrice">Precio Especial:</label>
+        <input id="specialPrice" [(ngModel)]="dino.specialPrice" name="specialPrice" type="number" required />
+      </div>
+      <div class="form-group">
+        <label for="size">Tamaño:</label>
+        <input id="size" [(ngModel)]="dino.size" name="size" required />
+      </div>
+      <div class="form-group">
+        <label for="claimable">Reclamable:</label>
+        <input id="claimable" [(ngModel)]="dino.claimable" name="claimable" type="checkbox" />
+      </div>
+      <div class="form-group">
+        <label for="img">Imagen:</label>
+        <input id="img" [(ngModel)]="dino.img" name="img" required />
+      </div>
+      <button type="submit">Insertar Dino</button>
+    </form>
+  </div>
+
+  <!-- Tarjeta de usuario -->
+  <div class="profile-container">
+    <h2>Perfil de Usuario</h2>
+    <p><strong>Nombre:</strong> {{ user?.name }}</p>
+    <p><strong>Usuario:</strong> {{ user?.username }}</p>
+    <p><strong>EOS:</strong> {{ user?.eos }}</p>
+    <button (click)="logout()">Cerrar Sesión</button>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+/* Contenedor principal para el layout */
+.layout-container {
+  display: flex;
+  justify-content: space-between; /* Espacio entre las columnas */
+  align-items: flex-start; /* Alinea los elementos al inicio verticalmente */
+  gap: 20px; /* Espaciado entre las columnas */
+  padding: 20px;
+}
+
+/* Contenedor del formulario */
+.form-container {
+  flex: 1;
+  max-width: 400px; /* Asegura que el formulario no sea demasiado estrecho */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+/* Estilo para los títulos */
+.form-container h2,
+.profile-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Estilo para los campos del formulario */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Estilo para los campos del formulario */
+.form-group input {
+  width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */
+  max-width: 600px; /* Opcional: Limita el ancho máximo */
+  padding: 10px; /* Aumenta el padding para un diseño más espacioso */
+  font-size: 16px; /* Aumenta el tamaño de la fuente */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Botón del formulario */
+.form-container button {
+  width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+  max-width: 600px; /* Opcional: Limita el ancho máximo */
+  margin-top: 15px; /* Aumenta el margen superior */
+  padding: 12px 20px; /* Aumenta el padding para un diseño más espacioso */
+  font-size: 16px;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #218838;
+}
+
+/* Tarjeta de usuario */
+.profile-container {
+  flex: 1; /* Ocupa el espacio disponible */
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+/* Botón de cerrar sesión */
+.profile-container button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-container button:hover {
+  background-color: #0056b3;
+}
