@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { environment } from '../../../environments/environment'; 
 @Component({
   selector: 'app-login',
   standalone: true, // Componente independiente
@@ -18,7 +18,7 @@ export class LoginComponent {
 
   onSubmit() {
     const loginData = { username: this.username, password: this.password };
-    this.http.post('http://localhost:3000/admins/login', loginData, { withCredentials: true })
+    this.http.post(`${environment.apiUrl}/admins/login`, loginData, { withCredentials: true })
       .subscribe({
         next: (response: any) => {
           console.log('Login exitoso:', response);

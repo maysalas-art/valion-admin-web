@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { environment } from '../../../environments/environment'; 
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -26,7 +26,7 @@ export class SignupComponent {
       password: this.password,
     };
 
-    this.http.post('http://localhost:3000/admins/signup', signupData)
+    this.http.post(`${environment.apiUrl}/admins/signup`, signupData)
       .subscribe({
         next: (response: any) => {
           console.log('Registro exitoso:', response);
