@@ -1,431 +1,312 @@
-/* Contenedor principal con 3 columnas */
-.layout-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px; /* Espaciado entre las columnas */
-  padding: 20px;
-  align-items: flex-start; /* Alinea las columnas al inicio verticalmente */
+/*-------------USER INFO-----------------*/
+.user-info {
+  display: flex; /* Asegura que el contenedor use Flexbox */
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 10px; /* Espaciado entre los elementos */
 }
 
-/* Primera columna: Formulario */
-.form-column {
-  display: flex;
-  gap: 20px;
-  max-width: 100%; 
-  overflow: hidden;
-  flex: 1; 
-  flex-direction: column;
-}
-.command-column {
-  flex: 1; /* Ocupa el mismo espacio que la segunda columna */
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Espaciado entre los renglones */
-}
-/* Segunda columna: Información del usuario y dinosaurios */
-.info-column {
-  flex: 1; /* Permite que la columna ocupe el espacio restante */
-  display: flex;
-  flex-direction: column;
-  gap: 20px; /* Espaciado entre los renglones */
-  max-width: 100%; /* Asegura que la columna no exceda el ancho del contenedor */
-  overflow: hidden; /* Evita el desbordamiento del contenido */
-}
-
-/* Contenedor del formulario para insertar dino-----------------------------------------------------------*/
-
-.form-container {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
-
-/* Botón de "Insertar Dino" */
-.insert-dino-button {
-  width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
-  max-width: 600px; /* Opcional: Limita el ancho máximo */
-  margin-top: 15px; /* Aumenta el margen superior */
-  padding: 12px 20px; /* Aumenta el padding para un diseño más espacioso */
-  font-size: 16px;
-  color: #fff;
-  background-color: #28a745; /* Color verde */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.insert-dino-button:hover {
-  background-color: #218838; /* Verde más oscuro al pasar el cursor */
-}
-/* Estilo para los títulos */
-.form-container h2,
-.profile-container h2 {
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
-}
-
-/* Estilo para los campos del formulario */
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
+.user-info p {
+  margin: 5px;
+  margin-left: 30px;
   font-size: 14px;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-/* Estilo para los campos del formulario */
-.form-group input {
-  width: 100%; /* Asegura que los campos ocupen todo el ancho disponible */
-  max-width: 600px; /* Opcional: Limita el ancho máximo */
-  padding: 10px; /* Aumenta el padding para un diseño más espacioso */
-  font-size: 16px; /* Aumenta el tamaño de la fuente */
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-/* Contenedor de opciones de tamaño */
-.size-options {
-  display: flex;
-  gap: 10px; /* Espaciado entre los botones */
-  justify-content: center;
-  flex-wrap: nowrap; /* Evita que los botones se ajusten a varias filas */
-  overflow-x: auto; /* Permite desplazamiento horizontal si hay demasiados botones */
-}
-
-/* Botón de tamaño */
-.size-option {
-  display: flex;
-  flex-direction: column;
+  display: flex; /* Asegura que los íconos y el texto estén en línea */
   align-items: center;
-  justify-content: center;
-  padding: 10px;
-  border: 2px solid transparent;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100px; /* Ancho fijo para los botones */
-  height: 120px; /* Altura fija para los botones */
-  text-align: center;
-  font-size: 12px;
-  font-weight: lighter;
-  color: #333;
 }
 
-.size-option img {
-  width: 50px; /* Tamaño de la imagen */
-  height: 50px;
-  margin-bottom: 5px;
+.user-info i {
+  margin-right: 5px;
 }
 
-.size-option:hover {
-  border-color: #007bff;
-  background-color: #e9f5ff;
+/* Estilo personalizado para el botón de cerrar sesión */
+.p-button.logout-button {
+  border: none!important; /* Sin borde */
+  color: white!important; /* Texto blanco */
+  margin-right: 35px;
 }
 
-.size-option.selected {
-  border-color: #007bff; /* Cambia el borde a azul */
-  background-color: #cce5ff; /* Fondo azul claro */
-  color: #004085; /* Texto azul oscuro */
+.p-button.logout-button:hover {
+  background-color: #c9302c!important; /* Color de fondo más oscuro al pasar el mouse */
 }
-/* Contenedor de la vista previa de la imagen */
-.image-preview-container {
-  position: relative;
-  width: 150px;
-  height: 150px;
+/*-------------CONTENIDO PRINCIPAL CON 2 COLUMNAS-----------------------------------------------*/
+/* Contenedor principal */
+.flex {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  margin-top: 10px;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
+  gap: 1rem; /* Espaciado entre columnas o filas */
+}
+
+.md\:flex-row {
+  flex-direction: row; /* Columnas en pantallas medianas o más grandes */
+}
+
+.flex-col {
+  flex-direction: column; /* Renglones en pantallas pequeñas */
+}
+
+.p-col-12 {
+  flex: 1 1 100%; /* Ocupa el 100% del ancho en pantallas pequeñas */
+}
+
+.md\:p-col-6 {
+  flex: 1 1 48%; /* Ocupa el 48% del ancho en pantallas medianas o más grandes */
+  max-width: 48%; /* Asegura que no exceda el 48% */
+}
+
+.card {
+  box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+  padding: 1rem; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .md\:p-col-6 {
+    flex: 1 1 100%; /* Ocupa el 100% del ancho en pantallas pequeñas */
+    max-width: 100%; /* Asegura que no exceda el 100% */
+  }
+
+  .p-table td {
+    font-size: 12px; /* Reduce el tamaño de fuente */
+    padding: 8px; /* Ajusta el relleno */
+  }
+}
+/*DINOSAURIOS REGISTRADOS header*/
+.dinosaur-header {
+  display: flex; /* Activa Flexbox */
+  flex-direction: row; /* Asegura que los elementos estén en un renglón */
+  flex-wrap: wrap;
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 0.5rem; /* Espaciado entre los elementos */
+  
+}
+/*barra de búsqueda*/
+/* Ajusta el ancho máximo de la barra de búsqueda */
+
+.p-input-icon-left {
+  display: flex; /* Activa Flexbox */
+  flex-direction: row; /* Asegura que los elementos estén en un renglón */
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 0.5rem; /* Espaciado entre los elementos */
+}
+/* Efecto al pasar el mouse */
+.hover-row:hover {
+  background-color: #04c79d17; /* Fondo claro al pasar el mouse */
+  cursor: pointer; /* Cambia el cursor a pointer */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Estilo para la fila seleccionada */
+.selected-row {
+  background-color: #d1e7dd; /* Fondo verde claro */
+  border-left: 4px solid #0f5132; /* Indicador visual en el borde izquierdo */
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+/* Tabla */
+.p-table td {
+  vertical-align: middle; /* Alinea el contenido verticalmente al centro */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
   overflow: hidden;
+  text-overflow: ellipsis; /* Agrega puntos suspensivos si el texto es demasiado largo */
+  max-width: 150px; /* Limita el ancho máximo de las celdas */
+}
+/* Imagen del dinosaurio */
+.shadow-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  border-radius: 8px; /* Bordes redondeados */
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 5px; /* Espaciado interno para separar la imagen del fondo */
+  display: inline-block; /* Asegura que el fondo se ajuste al tamaño de la imagen */
+}
+.dino-row {
+  cursor: pointer; /* Cambia el cursor al pasar sobre la fila */
+  transition: background-color 0.3s; /* Transición suave para el color de fondo */
+  padding: 10px; /* Espaciado interno */
+}
+/* Espaciado entre los renglones de los datos del dinosaurio */
+.dino-row div,
+.dino-row strong {
+  display: block;
+  margin-bottom: 8px; /* Agrega espacio entre los renglones */
 }
 
-.loading-spinner {
-  position: absolute; /* Superpone el spinner sobre la imagen */
-  width: 40px;
-  height: 40px;
-  border: 4px solid #ddd;
-  border-top: 4px solid #007bff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+.dino-row div:last-child,
+.dino-row strong:last-child {
+  margin-bottom: 0; /* Elimina el margen inferior del último renglón */
+}
+/* Estilo para el atributo "Reclamable" */
+.dino-claimable {
+  font-weight: bold;
 }
 
-@keyframes spin {
+.dino-claimable.true {
+  color: #28a745; /* Verde inicial para "Sí" */
+  animation: colorChange 1.5s infinite alternate; /* Animación de cambio de color */
+  font-weight: normal;
+}
+@keyframes colorChange {
   0% {
-    transform: rotate(0deg);
+    color: #57a728; /* Verde */
   }
   100% {
-    transform: rotate(360deg);
+    color: #17a2b8; /* Azul */
   }
 }
 
-.preview-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-  display: block;
+.dino-claimable.false {
+  color: #6c757d; /* Gris para "No" */
+  font-weight: normal; /* Reduce el peso de la letra */
 }
-/*-------------COLUMNA PARA INSERTAR COMANDO---------------------------------------------------------------------------------------------*/
-/* Contenedor de comandos */
-.command-container {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+/*----------------------------FORMULARIO PARA COMANDO--------------------------------------------*/
 
-/* Estilo para los campos de stats en un solo renglón */
-.stats-row {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Espaciado entre los campos */
-  flex-wrap: wrap; /* Permite que los campos se ajusten en pantallas pequeñas */
+.command-column {
+  flex: 1 1 100%; /* Por defecto, ocupa el 100% del ancho */
+  max-width: 100%;
 }
-
-.stats-row label {
-  margin-right: 5px;
-  font-size: 14px;
-  color: #333;
-}
-
-.stats-row input {
-  flex: 1; /* Los campos ocupan el mismo espacio */
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
-}
-/* Contenedor del comando generado */
-.command-row {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Espaciado entre el campo de texto y el botón */
+.BP-field{
   margin-top: 20px;
 }
-
-/* Campo de texto para el comando generado */
-.command-output {
-  flex: 1; /* Ocupa todo el espacio disponible */
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: #f9f9f9;
-  color: #333;
-  box-sizing: border-box;
+.stats-container{
+  display: flex; /* Activa Flexbox */
+  flex-direction: row; /* Asegura que los elementos estén en un renglón */
+  flex-wrap: wrap;
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 0.5rem; /* Espaciado entre los elementos */
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
-
-/* Botón de copiar */
-.copy-button {
-  padding: 10px 20px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.copy-button:hover {
-  background-color: #0056b3;
-}
-/* Tarjeta de usuario ---------------------------------------------------------------------------------------------------------*/
-/* Contenedor de datos del usuario */
-.user-info-container {
-  display: flex;
+.stats-row {
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center;
-  justify-content: space-between; /* Espaciado entre los datos y el botón */
-  padding: 10px 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  margin-bottom: 20px; /* Espaciado debajo del renglón */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto', sans-serif; /* Cambia la fuente  */
-  font-weight: 300; /* Hace la fuente más delgada */
+  gap: 10px;
 }
 
-/* Estilo para los textos de los datos del usuario */
-.user-info-container p {
-  margin: 0 15px 0 0; /* Espaciado entre los textos */
-  font-size: 14px;
-  color: #333;
+.stat {
+  flex: 1; /* Para que se distribuyan equitativamente */
+  display: flex; /* Activa Flexbox */
+}
+.stat input{
+  max-width: 100px;
+  margin-left: 20px;
+}
+.copy-command{
+  display: flex; /* Activa Flexbox */
+  flex-direction: row; /* Asegura que los elementos estén en un renglón */
+  flex-wrap: wrap; /* Alinea los elementos verticalmente al centro */
+  gap: 0.5rem; /* Espaciado entre los elementos */
+  margin-top: 10px;
+  width: 100%;
+}
+.command-copy-button {
+  display: flex; /* Activa Flexbox */
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 0.5rem; /* Espaciado entre el input y el botón */
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
 }
 
-/* Botón de cerrar sesión */
-.user-info-container button {
-  padding: 10px 20px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.user-info-container button:hover {
-  background-color: #0056b3;
-}
-/*----------------------------------------------------------------------------------------------------------*/
-/* Encabezado fijo con título y barra de búsqueda */
-.dino-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  border-bottom: 1px solid #ddd;
-  background-color: #f9f9f9;
-  position: sticky;
-  top: 0; /* Fija el encabezado en la parte superior */
-  z-index: 10; /* Asegura que el encabezado esté encima del contenido desplazable */
-}
-/* Estilo para el título */
-.dino-header h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
-}
-
-/* Barra de búsqueda */
-.search-bar {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  width: 200px;
-  box-sizing: border-box;
-}
-
-.search-bar:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
-}
-/* Contenedor de la lista de dinosaurios */
-.dino-list-container {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 100%; /* Asegura que no exceda el ancho de la columna */
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow-y: auto; /* Permite desplazamiento si hay demasiados dinosaurios */
-  max-height: 400px; /* Limita la altura máxima del contenedor */
+.command-copy-button input {
+  flex: 1; /* Permite que el input ocupe todo el espacio disponible */
+  padding: 8px; /* Espaciado interno */
+  font-size: 14px; /* Tamaño de fuente */
+  border-radius: 4px; /* Bordes redondeados */
   box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
-  overflow-x: hidden; /* Evita el desplazamiento horizontal */
 }
-/* Tarjeta de dinosaurio */
-.dino-card {
+
+.command-copy-button p-button {
+  flex-shrink: 0; /* Evita que el botón se reduzca */
+  padding: 8px 16px; /* Espaciado interno del botón */
+  font-size: 14px; /* Tamaño de fuente */
+}
+
+/*-------------------------------FORMULARIO PARA INSERTAR DINO------------------------------------*/
+/* Estilo general para el formulario */
+.p-fluid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Espaciado entre los campos */
+  padding: 1rem; /* Espaciado interno */
+}
+
+/* Estilo para cada campo del formulario */
+.p-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Espaciado entre la etiqueta y el campo */
+}
+
+/* Estilo para el grupo de radio buttons */
+.p-formgroup-inline {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
+  gap: 1rem; /* Espaciado entre los radio buttons */
+  align-items: center; /* Alinea los elementos verticalmente */
+}
+
+/* Estilo para el botón de insertar */
+.p-button {
+  align-self: flex-end; /* Alinea el botón a la derecha */
+  margin-top: 1rem; /* Espaciado superior */
+}
+
+/* Estilo para el diálogo */
+p-dialog {
+  width: 500px; /* Ancho fijo para el diálogo */
+  max-width: 90%; /* Asegura que no exceda el ancho de la pantalla en dispositivos pequeños */
+}
+
+/* Estilo para el checkbox */
+.p-field-checkbox {
+  pointer-events: auto;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #ddd;
+  gap: 0.5rem; /* Espaciado entre el checkbox y la etiqueta */
+}
+
+/* Estilo para el campo de imagen */
+.p-field img {
+  max-width: 100%;
   border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap; /* Permite que los elementos internos se ajusten en varias filas si es necesario */
-  width: 100%; /* Asegura que la tarjeta no exceda el ancho del contenedor */
-  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
-  max-width: 100%; /* Evita que las tarjetas excedan el ancho del contenedor */
+  margin-top: 0.5rem;
 }
-.dino-card:last-child {
-  margin-bottom: 0;
+/* Contenedor de la URL y la vista previa de la imagen */
+.p-d-flex.p-ai-center {
+  display: flex; /* Activa Flexbox */
+  align-items: center; /* Alinea los elementos verticalmente al centro */
+  gap: 1rem; /* Espaciado entre el campo de texto y la imagen */
 }
 
-/* Imagen del dinosaurio */
-.dino-image {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-right: 15px;
-  flex-shrink: 0; /* Evita que la imagen se reduzca en tamaños pequeños */
+/* Campo de texto para la URL de la imagen */
+.image-input {
+  flex: 1; /* Asegura que el input ocupe todo el espacio disponible */
+  height: 36px; /* Altura fija para coincidir con la imagen */
 }
 
-/* Detalles del dinosaurio */
-.dino-details {
-  flex: 1; /* Permite que los detalles ocupen el espacio restante */
-  min-width: 0; /* Evita que los detalles desborden el contenedor */
-  word-wrap: break-word; /* Permite que el texto se ajuste en varias líneas */
-  overflow: hidden; /* Oculta el contenido que excede el ancho */
-  white-space: nowrap; /* Evita que el texto se ajuste en varias líneas */
-  text-overflow: ellipsis; /* Agrega puntos suspensivos al texto truncado */
+/* Contenedor de la vista previa de la imagen */
+.image-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px; /* Ancho fijo para la imagen */
+  height: 36px; /* Coincide con la altura del campo de texto */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  margin: 0; /* Elimina cualquier margen adicional */
+  padding-top: 0px; /* Elimina cualquier padding adicional */
+  overflow: hidden; /* Asegura que la imagen no sobresalga del contenedor */
 }
 
-/* Efecto de desplazamiento (marquee) al pasar el cursor */
-.dino-details:hover {
-  white-space: normal; /* Permite que el texto se ajuste en varias líneas */
-  overflow: visible; /* Muestra el contenido completo */
+/* Imagen dentro del contenedor */
+.preview-img {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+  height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
+  object-fit: cover; /* Ajusta la imagen para que llene el contenedor sin deformarse */
+  border-radius: 4px; /* Bordes redondeados para la imagen */
+  margin: 0; /* Elimina cualquier margen adicional */
+  padding: 0; /* Elimina cualquier padding adicional */
+  display: block; /* Asegura que la imagen se comporte como un bloque */
 }
 
-/* Estilo para los párrafos dentro de los detalles */
-.dino-details p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
-  overflow: hidden; /* Oculta el contenido que excede el ancho */
-  white-space: nowrap; /* Evita que el texto se ajuste en varias líneas */
-  text-overflow: ellipsis; /* Agrega puntos suspensivos al texto truncado */
-  transition: all 0.3s ease; /* Agrega una transición suave */
-}
-
-/* Efecto de desplazamiento continuo */
-.dino-details p:hover {
-  white-space: normal; /* Permite que el texto se ajuste en varias líneas */
-  overflow: visible; /* Muestra el contenido completo */
-}
-
-/* Efecto hover en las tarjetas de dinosaurios */
-.dino-card:hover {
-  background-color: #f0f8ff; /* Fondo azul claro */
-  border-color: #007bff; /* Borde azul */
-  cursor: pointer;
-  transform: scale(1.02); /* Aumenta ligeramente el tamaño */
-  transition: all 0.3s ease; /* Transición suave */
-}
-
-/* Estilo para la tarjeta seleccionada */
-.dino-card.selected {
-  background-color: #e9f5ff; /* Fondo azul más claro */
-  border-color: #0056b3; /* Borde azul oscuro */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
-}
-/* Diseño responsivo para pantallas pequeñas */
-@media (max-width: 768px) {
-  .layout-container {
-    flex-direction: column; /* Apila las columnas verticalmente */
-    gap: 20px; /* Reduce el espacio entre las columnas */
-  }
-
-  .form-column,
-  .command-column,
-  .info-column {
-    flex: none; /* Elimina el comportamiento de flex-grow */
-    width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 100%; /* Asegura que no exceda el ancho del contenedor */
-  }
-
-  .dino-list-container {
-    max-height: none; /* Permite que el contenedor crezca según el contenido */
-  }
-}

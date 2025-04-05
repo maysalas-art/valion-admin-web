@@ -1,150 +1,258 @@
-<!-- Datos del usuario -->
-<div class="user-info-container">
-  <p><strong>Nombre:</strong> {{ user?.name }}</p>
-  <p><strong>Usuario:</strong> {{ user?.username }}</p>
-  <p><strong>EOS:</strong> {{ user?.eos }}</p>
-  <button (click)="logout()">Cerrar Sesión</button>
-</div>
-<!-- Contenedor principal con 3 columnas -->
-<div class="layout-container">
-  <!-- Primera columna: Formulario para insertar dinosaurio -->
-  <div class="form-column">
-    <div class="form-container">
+<p-toast></p-toast>
 
-      <div class="form-group">
-        <div class="image-preview-container">
-          <!-- Ícono de cargando -->
-          <div *ngIf="isImageLoading" class="loading-spinner"></div>
-        
-          <!-- Imagen -->
-          <img
-            [src]="dino.img"
-            class="preview-image"
-            (load)="onImageLoad()"
-            (error)="onImageError()"
-          />
-        </div>
-      </div>
-
-      <h2>Insertar Dino</h2>
-      <form (submit)="onSubmitDino()">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <input
-            id="name"
-            [(ngModel)]="dino.name"
-            name="name"
-            (input)="updateImageUrl()"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="bp">Blueprint:</label>
-          <input id="bp" [(ngModel)]="dino.bp" name="bp" required />
-        </div>
-        <div class="form-group">
-          <label for="specialPrice">Precio Especial:</label>
-          <input id="specialPrice" [(ngModel)]="dino.specialPrice" name="specialPrice" type="number" required />
-        </div>
-        <div class="form-group">
-          <label>Tamaño:</label>
-          <div class="size-options">
-            <button
-              *ngFor="let size of sizes"
-              type="button"
-              class="size-option"
-              [class.selected]="dino.size === size._id"
-              (click)="selectSize(size._id)"
-            >
-              <!--<img [src]="'/assets/sizes/' + size.label + '.png'" [alt]="size.size" />-->
-              {{ size.size }}
-            </button>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="claimable">Reclamable:</label>
-          <input id="claimable" [(ngModel)]="dino.claimable" name="claimable" type="checkbox" />
-        </div>
-        <button type="submit" class="insert-dino-button">Insertar Dino</button>
-      </form>
+<!-- Barra superior con datos de usuario -->
+<p-toolbar>
+  <ng-template pTemplate="start">
+    <div class="user-info p-d-flex p-ai-center p-gap-3">
+      <p>
+        <i class="pi pi-user" pTooltip="Nombre del administrador" tooltipPosition="bottom"></i>
+        {{ user?.name || 'N/A' }}
+      </p>
+      <p>
+        <i class="pi pi-id-card" pTooltip="Nombre de usuario" tooltipPosition="bottom"></i>
+        {{ user?.username || 'N/A' }}
+      </p>
+      <p>
+        <i class="pi pi-key" pTooltip="EOS" tooltipPosition="bottom"></i>
+        {{ user?.eos || 'error' }}
+      </p>
     </div>
-  </div>
-  <!-- Segunda columna: Comandos -->
-  <div class="command-column">
-    <h2>Comandos</h2>
-    <div class="command-container">
+  </ng-template>
+
+  <ng-template pTemplate="end">
+    <p-button label="Cerrar Sesión" icon="pi pi-power-off" (click)="logout()" class="logout-button"></p-button>
+  </ng-template>
+</p-toolbar>
+
+
+<!-- Contenido principal en dos columnas -->
+<div class="flex flex-col md:flex-row gap-4" style="min-height: 81vh;">
+  
+  <!-- Columna izquierda: Formulario Comando -->
+  <div class="p-col-12 md:p-col-6 card p-4">
+    <!-- Contenido de la columna izquierda (Formulario comando) -->
+    <p-card class="command-form p-shadow-3 p-p-3 command-form">
+      <h2 class="text-lg font-semibold p-mb-3">Comando</h2>
       <form>
         <!-- Campo EOS -->
-        <div class="form-group">
+        <div class="p-field p-mb-3 EOS-field">
           <label for="eos">EOS:</label>
-          <input id="eos" type="text" name="eos" [value]="user?.eos || 'error'" readonly />
-        </div>
-    
-        <!-- Campo BP -->
-        <div class="form-group">
-          <label for="bp">BP:</label>
-          <input id="bp" type="text" name="bp" [(ngModel)]="commandDino.bp" (ngModelChange)="generateCommand()" />
-        </div>
-    
-        <!-- Stats en un solo renglón -->
-        <div class="form-group stats-row">
-          <label for="stat1">Stat 1:</label>
-          <input id="stat1" type="text" name="stat1" [(ngModel)]="commandDino.stat1" (ngModelChange)="generateCommand()" />
-          <label for="stat2">Stat 2:</label>
-          <input id="stat2" type="text" name="stat2" [(ngModel)]="commandDino.stat2" (ngModelChange)="generateCommand()" />
-          <label for="stat3">Stat 3:</label>
-          <input id="stat3" type="text" name="stat3" [(ngModel)]="commandDino.stat3" (ngModelChange)="generateCommand()" />
-        </div>
-    
-        <!-- Campo de texto para el comando y botón de copiar -->
-        <div class="form-group command-row">
           <input
-            id="generatedCommand"
+            id="eos"
+            pInputText
             type="text"
-            [value]="generatedCommand"
+            name="eos"
+            [value]="user?.eos || 'error'"
             readonly
-            class="command-output"
           />
-          <button type="button" (click)="copyCommand()" class="copy-button">Copiar</button>
+        </div>
+
+        <!-- Campo BP -->
+        <div class="p-field p-mb-3 BP-field">
+          <label for="bp">BP:</label>
+          <input
+            id="bp"
+            pInputText
+            type="text"
+            name="bp"
+            [(ngModel)]="commandDino.bp"
+            (ngModelChange)="generateCommand()"
+          />
+        </div>
+
+        <!-- Stats en un solo renglón -->
+        <div class="p-d-flex p-ai-center p-jc-between mb-4 stats-container">
+          <div class="stat">
+            <label for="stat1">Stat 1:</label>
+            <input
+              id="stat1"
+              pInputText
+              type="number"
+              name="stat1"
+              [(ngModel)]="commandDino.stat1"
+              (ngModelChange)="generateCommand()"
+            />
+          </div>
+          <div class="stat">
+            <label for="stat2">Stat 2:</label>
+            <input
+              id="stat2"
+              pInputText
+              type="number"
+              name="stat2"
+              [(ngModel)]="commandDino.stat2"
+              (ngModelChange)="generateCommand()"
+            />
+          </div>
+          <div class="stat">
+            <label for="stat3">Stat 3:</label>
+            <input
+              id="stat3"
+              pInputText
+              type="number"
+              name="stat3"
+              [(ngModel)]="commandDino.stat3"
+              (ngModelChange)="generateCommand()"
+            />
+          </div>
+        </div>
+        <!-- parte para copiar comando -->
+        <label for="command">Comando:</label>
+        <div class="copy-command">  
+          <div class="p-d-flex p-ai-center command-copy-button">
+            <input
+              id="generatedCommand"
+              pInputText
+              type="text"
+              name="command"
+              [value]="generatedCommand"
+            />
+            <!-- Botón para copiar comando -->
+            <div>
+              <p-button
+                icon="pi pi-copy"
+                (click)="copyCommand()"
+              ></p-button>
+            </div>
+          </div>
         </div>
       </form>
+    </p-card>
+  </div>
+  <!-- Columna derecha: Lista de Dinosaurios -->
+  <p-card class="p-col-12 md:p-col-6 card p-4">
+    <div class="p-d-flex p-ai-center p-jc-between mb-4 dinosaur-header">
+      <h2 class="text-lg font-semibold">Dinosaurios Registrados</h2>
+      <div class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="filterDinos()"
+          placeholder="Buscar dinosaurio..."
+          class="p-inputtext-sm"
+        />
+      </div>
+      <p-button label="Nuevo" icon="pi pi-plus" (click)="openDinoDialog()" class="mb-2"></p-button>
     </div>
-  </div>
-  <!-- Tercera columna: Datos del usuario y dinosaurios registrados -->
-<div class="info-column">
-  <!-- Encabezado fijo con título y barra de búsqueda -->
-  <div class="dino-header">
-    <h2>Dinosaurios Registrados</h2>
-    <input
-      type="text"
-      placeholder="Buscar dinosaurio..."
-      class="search-bar"
-      [(ngModel)]="searchQuery"
-      (input)="filterDinos()"
-    />
-  </div>
 
-  <!-- Contenedor desplazable para la lista de dinosaurios -->
-  <div class="dino-list-container">
-    <div *ngIf="filteredDinos.length > 0; else noDinos">
-      <div 
-      class="dino-card"
-       *ngFor="let dino of filteredDinos"
-       (click)="selectDinoBP(dino.bp)"
-       [class.selected]="commandDino.bp === dino.bp"
+
+    <p-table
+    [value]="filteredDinos"
+    [paginator]="true"
+    [rows]="5"
+    [responsiveLayout]="'scroll'"
+    dataKey="name"
+    class="custom-table"
+  >
+    <!-- Cuerpo de la tabla -->
+    <ng-template pTemplate="body" let-dino>
+      <tr class="hover-row" 
+      [ngClass]="{ 'selected-row': selectDinoBP === dino }"
+      (click)="selectDinoBP(dino.bp)"
       >
-        <img [src]="dino.img" alt="{{ dino.name }}" class="dino-image" />
-        <div class="dino-details">
-          <h3>{{ dino.name }}</h3>
-          <p><strong>Blueprint:</strong> {{ dino.bp }}</p>
-          <p><strong>Precio Especial:</strong> {{ dino.specialPrice | currency }}</p>
-          <p><strong>Tamaño:</strong> {{ dino.size }}</p>
-          <p><strong>Reclamable:</strong> {{ dino.claimable ? 'Sí' : 'No' }}</p>
+        <td>
+          <img [src]="dino.img" alt="{{ dino.name }}" width="50" class="shadow-lg rounded" />
+        </td>
+        <td class="dino-row">
+          <div>
+            <strong>{{ dino.name }}</strong>
+            <div class="dino-bp text-sm text-gray-500">
+              {{ dino.bp }}
+            </div>
+            <div class="dino-special-price text-sm text-gray-500">
+              {{ dino.specialPrice | currency }}
+            </div>
+            <div class="dino-size text-sm text-gray-500">
+              {{ dino.size }}
+            </div>
+            <div class="dino-claimable text-sm" [ngClass]="{ 'true': dino.claimable, 'false': !dino.claimable }">
+              Reclamable: {{ dino.claimable ? 'Sí' : 'No' }}
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>
+
+  
+
+
+<!-- Diálogo para insertar dinosaurio -->
+<p-dialog header="Insertar Dino" [(visible)]="displayDinoDialog" [modal]="true" [closable]="true">
+  <form (ngSubmit)="onSubmitDino()">
+    <div class="p-fluid">
+      <div class="p-field">
+        <label for="name">Nombre:</label>
+        <input
+          id="name"
+          pInputText
+          type="text"
+          [(ngModel)]="dino.name"
+          name="name"
+          (ngModelChange)="updateImageUrl()"
+          required
+        />
+      </div>
+      <div class="p-field">
+        <label for="bp">Blueprint:</label>
+        <input id="bp" pInputText type="text" [(ngModel)]="dino.bp" name="bp" required>
+      </div>
+      <div class="p-field">
+        <label for="specialPrice">Precio Especial:</label>
+        <input id="specialPrice" pInputText type="number" [(ngModel)]="dino.specialPrice" name="specialPrice" required>
+      </div>
+      <div class="p-field">
+        <label for="size">Tamaño:</label>
+        <div class="p-formgroup-inline">
+          <ng-container *ngFor="let size of sizes">
+            <p-radioButton
+              [name]="'size'"
+              [value]="size._id"
+              [(ngModel)]="dino.size"
+              inputId="{{ size._id }}"
+            ></p-radioButton>
+            <label [for]="size._id">{{ size.label }}</label> <!-- Etiqueta asociada al radio button -->
+          </ng-container>
         </div>
       </div>
+      <div class="p-field-checkbox">
+        <p-checkbox
+          inputId="claimable"
+          [(ngModel)]="dino.claimable"
+          binary="true"
+          name="claimable"
+        ></p-checkbox>
+        <label for="claimable">Reclamable</label>
+      </div>
+
+      <div class="p-field">
+        <label for="img">URL de imagen:</label>
+        <div class="p-d-flex p-ai-center">
+          <input
+            id="img"
+            pInputText
+            type="text"
+            [(ngModel)]="dino.img"
+            name="img"
+            (input)="updateImageUrl()"
+            class="image-input"
+          />
+          <div class="image-preview shadow-lg">
+            <img
+              [src]="dino.img || 'https://arkids.net/image/creature/120/bunny-oviraptor.png'"
+              alt="Vista previa"
+              class="preview-img"
+              (load)="onImageLoad()"
+              (error)="onImageError()"
+            />
+          </div>
+        </div>
+      </div>
+
+      <p-button label="Insertar" icon="pi pi-check" type="submit"></p-button>
     </div>
-    <ng-template #noDinos>
-      <p>No hay dinosaurios registrados aún.</p>
-    </ng-template>
-  </div>
-</div>
+  </form>
+</p-dialog>

@@ -17,7 +17,9 @@ export const appConfig: ApplicationConfig = {
         options: {
           darkModeSelector: '.valion-admin-web-dark'
         }
-      }
+      },
+      ripple: true,
+      inputVariant: 'filled',
     }),
     provideZoneChangeDetection({
        eventCoalescing: true

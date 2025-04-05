@@ -1,5 +1,8 @@
-<div class="banner">
-  <div class="animated-circle"></div>
+<div class="banner p-d-flex p-ai-center p-jc-between">
   <h1 class="light-text">AR</h1>
+  <button class="dark-mode-toggle p-button p-button-rounded" (click)="toggleDarkMode()">
+    <i class="pi" [ngClass]="isDarkMode ? 'pi-moon' : 'pi-sun'"></i>
+  </button>
 </div>
+<div class="color-line"></div>
 <router-outlet></router-outlet>

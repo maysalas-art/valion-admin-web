@@ -4,13 +4,43 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'; // Importa FormsModule
 import { environment } from '../../../environments/environment'; 
 import { CommonModule } from '@angular/common';
-import { get } from 'http';
+import { MessageService } from 'primeng/api';
+//primeNG
+import { ToolbarModule } from 'primeng/toolbar';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
+import { TagModule } from 'primeng/tag';
+import { TooltipModule } from 'primeng/tooltip';
+import { RadioButtonModule } from 'primeng/radiobutton';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, RouterModule, CommonModule], // Asegúrate de importar los módulos necesarios
+  imports: [
+    FormsModule,
+    HttpClientModule, 
+    RouterModule, 
+    CommonModule,
+    //primeNG modules
+    ToolbarModule,
+    CardModule,
+    ButtonModule,
+    DialogModule,
+    TableModule,
+    InputTextModule,
+    CheckboxModule,
+    ToastModule,
+    TagModule,
+    TooltipModule,
+    RadioButtonModule
+  ], // Asegúrate de importar los módulos necesarios
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  providers: [MessageService] // Proveedor para el servicio de mensajes
 })
 export class ProfileComponent implements OnInit {
   user: any; // Datos del administrador
@@ -21,8 +51,8 @@ export class ProfileComponent implements OnInit {
   filteredDinos: any[] = []; // Lista filtrada de dinosaurios
   selectedDinoId: string | null = null; // ID del dinosaurio seleccionado
   generatedCommand: string = ''; // Comando generado dinámicamente
+  displayDinoDialog: boolean = false; // Controla la visibilidad del diálogo para insertar dinosaurio
 
-  
   // Modelo para el formulario de comandos
   commandDino = {
     bp: '',
@@ -41,7 +71,7 @@ export class ProfileComponent implements OnInit {
     img: ''
   };
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private messageService: MessageService) {}
 
   ngOnInit() {
     // Recupera los datos del administrador desde el almacenamiento local
@@ -53,20 +83,26 @@ export class ProfileComponent implements OnInit {
       this.router.navigate(['/login']);
     }
 
-    // Obtiene la lista de tamaños de dinos desde el backend
+    // Obtiene la lista de dinosaurios registrados
+    this.getDinos();
+  }
+  // Obtiene la lista de tamaños de dinos desde el backend
+  loadSizes() {
     this.http.get<any[]>(`${environment.apiUrl}/dino-size`).subscribe({
       next: (sizes) => {
         this.sizes = sizes; // Almacena los tamaños obtenidos
       },
       error: (error) => {
         console.error('Error al obtener tamaños:', error);
-        alert('No se pudieron cargar los tamaños de dinosaurios');
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudieron cargar los tamaños de dinosaurios' });
+        //alert('No se pudieron cargar los tamaños de dinosaurios');
       }
     });
-    // Obtiene la lista de dinosaurios registrados
-    this.getDinos();
   }
-
+  openDinoDialog() {
+    this.displayDinoDialog = true
+    this.loadSizes(); // Carga los tamaños al abrir el diálogo
+  }
   //Mostrar lista de dinos registrados
   getDinos() {
     this.http.get<any[]>(`${environment.apiUrl}/dino`).subscribe({
@@ -76,7 +112,8 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al obtener dinosaurios:', error);
-        alert('No se pudieron cargar los dinosaurios registrados');
+        //alert('No se pudieron cargar los dinosaurios registrados');
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudieron cargar los dinosaurios registrados' });
       }
     });
   }
@@ -92,7 +129,9 @@ export class ProfileComponent implements OnInit {
    // Método para seleccionar el BP del dinosaurio
    selectDinoBP(bp: string) {
     this.commandDino.bp = bp; // Actualiza el campo BP en el formulario
+    this.generateCommand(); // Genera el comando después de seleccionar el BP
     console.log('BP seleccionado:', bp); // Opcional: Verifica en la consola
+    this.messageService.add({ severity: 'info', summary: 'BP seleccionado de dino', detail: `BP seleccionado: ${bp}` });
   }
 
 
@@ -104,7 +143,7 @@ export class ProfileComponent implements OnInit {
       this.isImageLoading = true; // Marca que la imagen está cargando
       console.log('URL generada:', this.dino.img); 
     } else {
-      this.dino.img = 'https://picsum.photos/300/300';
+      this.dino.img = 'https://arkids.net/image/creature/120/bunny-oviraptor.png'; // URL por defecto si no hay nombre
       this.isImageLoading = false;
     }
   }
@@ -132,7 +171,7 @@ export class ProfileComponent implements OnInit {
     this.http.post(`${environment.apiUrl}/dino`, this.dino).subscribe({
       next: (response) => {
         console.log('Dino insertado:', response);
-        alert('Dino insertado correctamente');
+        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Dinosaurio insertado correctamente' });
         // Limpia el formulario después de insertar
         this.dino = {
           name: '',
@@ -146,9 +185,11 @@ export class ProfileComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error al insertar dino:', error);
-        alert('Error al insertar dino');
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Error al insertar dinosaurio' });
+        //alert('Error al insertar dino');
       }
     });
+    this.displayDinoDialog = false; // Cierra el diálogo después de insertar
   }
   //para seleccionar el tamaño del dino
   selectSize(sizeId: string) {
@@ -169,10 +210,11 @@ export class ProfileComponent implements OnInit {
   copyCommand() {
     navigator.clipboard.writeText(this.generatedCommand).then(
       () => {
-        alert(`Comando copiado al portapapeles: ${this.generatedCommand}`);
+        this.messageService.add({ severity: 'success', summary: 'Comando copiado', detail: `El comando ha sido copiado al portapapeles: ${this.generatedCommand}` });
       },
       (err) => {
         console.error('Error al copiar el comando:', err);
+        this.messageService.add({ severity: 'error', summary: 'Error al copiar', detail: 'No se pudo copiar el comando al portapapeles' });
       }
     );
   } 
